@@ -1,385 +1,1534 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ETF Advisor Fusion | SWC 完整提案</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #f0f4f8;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            color: #0a1e2f;
-            padding: 2rem 1.5rem;
-            line-height: 1.4;
-        }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .hero {
-            background: linear-gradient(135deg, #0b2b3b 0%, #123e52 100%);
-            color: white;
-            padding: 2rem 2.5rem;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-        .hero .tagline {
-            font-size: 1.2rem;
-            opacity: 0.85;
-            border-left: 3px solid #2dd4bf;
-            padding-left: 1rem;
-            margin-top: 0.75rem;
-        }
-        .grid-2col {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-        }
-        .section {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #e9edf2;
-        }
-        .section:last-child {
-            border-bottom: none;
-        }
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0f3b4f, #1a5a6e);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .section-title span {
-            background: #eef2ff;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.2rem 0.8rem;
-            color: #1e6f5c;
-            background: #dff3f0;
-        }
-        .badge-compare {
-            background: #eef2ff;
-            border-radius: 30px;
-            padding: 0.2rem 1rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 0.8rem;
-            color: #0c4e6e;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #ffffff;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            margin: 1rem 0;
-        }
-        th {
-            background: #eef2fa;
-            padding: 0.8rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid #edf2f7;
-            font-size: 0.9rem;
-        }
-        .highlight {
-            background: #eafff7;
-            font-weight: 600;
-            color: #0e6b5e;
-        }
-        .check {
-            color: #10b981;
-            font-weight: bold;
-        }
-        .cross {
-            color: #ef4444;
-        }
-        .metric-box {
-            background: #f8fafc;
-            border-radius: 1rem;
-            padding: 1rem;
-            border-left: 4px solid #2c7a7b;
-        }
-        .flex-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            margin-top: 0.8rem;
-        }
-        .stat-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 0.8rem 1.2rem;
-            flex: 1;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-        .footer-contact {
-            background: #f9fbfe;
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            border-top: 1px solid #e2edf2;
-        }
-        button, .qr-note {
-            font-size: 0.8rem;
-        }
-        @media (max-width: 800px) {
-            .grid-2col {
-                grid-template-columns: 1fr;
-            }
-            .section {
-                padding: 1.2rem;
-            }
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-        }
-        .pillar {
-            font-weight: 700;
-            background: #e6f7f5;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-        }
-        hr {
-            margin: 1rem 0;
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, #cbd5e1, transparent);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ETF 社群交易平台：AI Agent 驅動的全球化投資生態系，整合 ETF 評等、資金流量、AI 報告、自動品管、動態再平衡與跨國在地化 Agent。" />
+  <meta name="keywords" content="ETF, AI Agent, 投資平台, ETF 評等, 資金流量, 動態再平衡, TradingView, 社群交易" />
+  <meta name="author" content="ETF Community" />
+
+  <title>ETF 社群交易平台｜AI Agent 驅動的全球化投資生態系</title>
+
+  <style>
+    :root {
+      --navy: #08285f;
+      --navy-2: #0f3b82;
+      --blue: #2f7ed8;
+      --green: #41a37d;
+      --green-2: #58bd91;
+      --ink: #102033;
+      --muted: #64748b;
+      --soft: #f4f8fc;
+      --soft-2: #edf4fb;
+      --white: #ffffff;
+      --border: #dbe6f2;
+      --warning: #f8b84e;
+      --danger: #df5b5b;
+      --shadow: 0 18px 45px rgba(8, 40, 95, 0.13);
+      --shadow-soft: 0 10px 28px rgba(8, 40, 95, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.98)),
+        linear-gradient(90deg, rgba(8, 40, 95, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(8, 40, 95, 0.045) 1px, transparent 1px);
+      background-size: auto, 48px 48px, 48px 48px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section.small {
+      padding: 68px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(65, 163, 125, 0.25);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(65, 163, 125, 0.08);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.65rem, 6vw, 6.25rem);
+      margin: 26px 0 22px;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4vw, 4.25rem);
+      margin: 18px 0 18px;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .lead {
+      font-size: clamp(1.12rem, 2vw, 1.42rem);
+      color: #4b5f78;
+      max-width: 780px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.84);
+      border-bottom: 1px solid rgba(219, 230, 242, 0.8);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      box-shadow: 0 10px 24px rgba(47, 126, 216, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #334155;
+      font-weight: 650;
+      font-size: 0.96rem;
+    }
+
+    .nav-links a {
+      opacity: 0.86;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      opacity: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      box-shadow: 0 14px 30px rgba(47, 126, 216, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 38px rgba(47, 126, 216, 0.32);
+    }
+
+    .btn-ghost {
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.8);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: rgba(47, 126, 216, 0.4);
+      background: var(--white);
+    }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 82px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(340px, 0.97fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 34px 0 32px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 760px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(219, 230, 242, 0.96);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -140px;
+      top: -150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(65, 163, 125, 0.22), transparent 62%);
+    }
+
+    .terminal-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 22px;
+      background: #071a3d;
+      color: white;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .terminal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      color: #b6c7e2;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #8aa1c3;
+    }
+
+    .signal-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .signal-line:first-of-type {
+      border-top: 0;
+    }
+
+    .signal-line b {
+      color: white;
+      font-size: 1.02rem;
+    }
+
+    .signal-line small {
+      color: #a8bad4;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #d9fff0;
+      background: rgba(65, 163, 125, 0.18);
+      border: 1px solid rgba(88, 189, 145, 0.4);
+    }
+
+    .mini-chart {
+      height: 210px;
+      margin-top: 22px;
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 58px),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 42px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mini-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transition: 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--navy);
+      background: linear-gradient(135deg, rgba(47, 126, 216, 0.12), rgba(65, 163, 125, 0.14));
+      font-size: 1.45rem;
+    }
+
+    .card-number {
+      color: var(--blue);
+      font-size: 0.92rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .highlight-box {
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(65, 163, 125, 0.4);
+      background: linear-gradient(135deg, rgba(65, 163, 125, 0.12), rgba(65, 163, 125, 0.04));
+    }
+
+    .highlight-box b {
+      color: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .rebalancing-board {
+      border-radius: var(--radius-xl);
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .chart-panel {
+      padding: 20px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #f8fbff, #ffffff);
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .chart-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 7px 12px;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--navy);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .ai-marker {
+      fill: var(--navy);
+      stroke: var(--blue);
+      stroke-width: 5;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 46px;
+      position: relative;
+    }
+
+    .workflow-step {
+      padding: 30px 22px;
+      text-align: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .workflow-step::after {
+      content: "→";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+
+    .workflow-step:last-child::after {
+      display: none;
+    }
+
+    .workflow-step .icon {
+      margin: 0 auto 18px;
+      width: 70px;
+      height: 70px;
+      font-size: 2rem;
+    }
+
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .engine-card {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .engine-card strong {
+      color: var(--navy);
+      font-size: 1.25rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .engine-visual {
+      height: 98px;
+      margin-bottom: 22px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 18% 50%, rgba(100, 116, 139, 0.22), transparent 22%),
+        radial-gradient(circle at 50% 50%, rgba(47, 126, 216, 0.18), transparent 24%),
+        radial-gradient(circle at 82% 50%, rgba(65, 163, 125, 0.22), transparent 22%),
+        linear-gradient(135deg, #f8fbff, #ffffff);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .engine-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 14%, rgba(8, 40, 95, 0.18) 14.4% 14.9%, transparent 15.3% 48%, rgba(65, 163, 125, 0.2) 48.5% 49%, transparent 49.5% 82%, rgba(47, 126, 216, 0.18) 82.5% 83%, transparent 83.5%);
+    }
+
+    .comparison-wrap {
+      overflow-x: auto;
+      margin-top: 40px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: var(--white);
+    }
+
+    th,
+    td {
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      font-weight: 900;
+      color: var(--navy);
+      background: #fbfdff;
+    }
+
+    th {
+      color: var(--navy);
+      font-size: 1.02rem;
+      background: #f5f9fe;
+    }
+
+    td {
+      color: #475569;
+      font-weight: 650;
+    }
+
+    .yes {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .no {
+      color: #9ca3af;
+      font-weight: 900;
+    }
+
+    .warn {
+      color: var(--warning);
+      font-weight: 900;
+    }
+
+    .featured-col {
+      color: var(--navy) !important;
+      background: linear-gradient(180deg, #f1f8ff, #ffffff) !important;
+      border-left: 3px solid var(--navy);
+      border-right: 3px solid var(--navy);
+    }
+
+    .global-map {
+      margin-top: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .map-node {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .map-center {
+      min-height: 290px;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      border-radius: 34px;
+      border: 14px solid var(--navy);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+    }
+
+    .map-center::before,
+    .map-center::after {
+      content: "";
+      position: absolute;
+      width: 54px;
+      height: 14px;
+      background: var(--navy);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .map-center::before {
+      left: -68px;
+    }
+
+    .map-center::after {
+      right: -68px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 42px;
+    }
+
+    .price-card {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .price-card.premium {
+      border: 4px solid var(--navy);
+      background: linear-gradient(180deg, #f2f7ff, #ffffff);
+      box-shadow: var(--shadow);
+    }
+
+    .price-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+    }
+
+    .price-title h3 {
+      margin: 0;
+      font-size: 1.65rem;
+    }
+
+    .price-title span {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature-list li {
+      display: flex;
+      gap: 12px;
+      color: #334155;
+      font-size: 1.04rem;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--green);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .flywheel {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 46px;
+      align-items: center;
+      margin-top: 38px;
+    }
+
+    .wheel {
+      width: min(470px, 100%);
+      aspect-ratio: 1;
+      margin: auto;
+      border-radius: 50%;
+      background:
+        conic-gradient(from 20deg, var(--navy) 0 33%, var(--green) 33% 67%, #8190a2 67% 100%);
+      position: relative;
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+    }
+
+    .wheel::before {
+      content: "";
+      position: absolute;
+      width: 47%;
+      height: 47%;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: inset 0 0 0 1px var(--border);
+    }
+
+    .wheel-label {
+      position: absolute;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow-soft);
+      color: var(--navy);
+      font-weight: 900;
+      text-align: center;
+      max-width: 220px;
+      border: 1px solid var(--border);
+    }
+
+    .wheel-label.one { right: -18px; top: 26%; }
+    .wheel-label.two { bottom: 4%; left: 24%; }
+    .wheel-label.three { left: -28px; top: 28%; }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 30px;
+      margin-top: 42px;
+    }
+
+    .mvp-box {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: var(--radius-xl);
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 34px;
+    }
+
+    .mvp-box strong {
+      display: block;
+      font-size: clamp(4rem, 10vw, 8rem);
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -0.08em;
+    }
+
+    .milestone-card {
+      border-radius: var(--radius-xl);
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 36px;
+    }
+
+    .milestones {
+      list-style: none;
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .milestones li {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: #334155;
+      font-size: 1.08rem;
+    }
+
+    .check {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--green);
+      font-weight: 900;
+      box-shadow: 0 8px 16px rgba(65, 163, 125, 0.25);
+    }
+
+    .rocket {
+      background: transparent;
+      box-shadow: none;
+      font-size: 1.45rem;
+    }
+
+    .cta {
+      padding: 60px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at top right, rgba(88, 189, 145, 0.28), transparent 38%),
+        linear-gradient(135deg, var(--navy), #0b397f 58%, #123e79);
+      color: var(--white);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta h2,
+    .cta p {
+      color: var(--white);
+    }
+
+    .cta p {
+      opacity: 0.86;
+      margin: 0 auto;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .cta .btn-ghost {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .footer small {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+      max-width: 780px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: grid;
+        place-items: center;
+      }
+
+      .hero-grid,
+      .split,
+      .flywheel,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-grid,
+      .workflow,
+      .engine-grid,
+      .pricing,
+      .global-map {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .global-map .map-center {
+        grid-column: 1 / -1;
+        order: -1;
+      }
+
+      .map-center::before,
+      .map-center::after,
+      .workflow-step::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-grid {
+        gap: 32px;
+      }
+
+      .hero-metrics,
+      .problem-grid,
+      .workflow,
+      .engine-grid,
+      .pricing,
+      .global-map {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .cta {
+        padding: 24px;
+        border-radius: 24px;
+      }
+
+      .card,
+      .price-card,
+      .milestone-card {
+        padding: 24px;
+      }
+
+      .wheel-label {
+        position: static;
+        margin: 8px;
+        transform: none;
+      }
+
+      .wheel {
+        border-radius: 28px;
+        aspect-ratio: auto;
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        background: linear-gradient(135deg, var(--navy), var(--green));
+      }
+
+      .wheel::before {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-    <div class="hero">
-        <h1>⚡ ETF Advisor Fusion</h1>
-        <div class="tagline">AI Agent 驅動的全球化投資生態系 · 主動分析報告 · 智慧評分機制 · 動態再平衡引擎</div>
-        <div style="margin-top: 1rem; font-size: 0.85rem;">「投資組合大擂台」 — 超越 Portfolio Visualizer 的唯一華人首選</div>
-    </div>
+  <nav class="nav" aria-label="主要導覽">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="ETF 社群交易平台首頁">
+        <span class="brand-mark">ETF</span>
+        <span>ETF 社群交易平台</span>
+      </a>
 
-    <!-- 1. Problem Statement -->
-    <div class="section">
-        <div class="section-title"><span>❶</span> Problem Statement</div>
-        <div class="grid-2col">
-            <div class="metric-box">
-                <div style="font-weight:800;">📉 申購流量盲區</div>
-                <div style="font-size:0.85rem; margin-top:5px;">散户難以即時追蹤資金流向，無法察覺法人布局先機。</div>
-                <div style="font-weight:800; margin-top:12px;">⚙️ 再平衡機制僵化</div>
-                <div style="font-size:0.85rem;">傳統工具 (含 Portfolio Visualizer) 僅支援固定比例，缺乏應對波動的「動態再平衡」。</div>
+      <button class="mobile-menu-btn" id="menuBtn" aria-label="開啟選單">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#problems">市場痛點</a>
+        <a href="#engine">AI 引擎</a>
+        <a href="#comparison">功能比較</a>
+        <a href="#global">跨國版圖</a>
+        <a href="#pricing">商業模式</a>
+        <a href="#roadmap">里程碑</a>
+        <a class="btn btn-primary" href="#contact">加入等待名單</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">AI Agent × ETF 評等 × 社群交易</span>
+          <h1>讓複雜 ETF 投資，變成可被理解、可被比較、可被行動的決策流程。</h1>
+          <p class="lead">
+            ETF 社群交易平台以 AI 智慧代理為核心，整合申購贖回流量、績效表現、研究報告品質、動態再平衡訊號與跨國在地化分析，打造面向全球投資人的主動式 ETF 決策生態系。
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#engine">查看 AI 決策流</a>
+            <a class="btn btn-ghost" href="#pricing">了解訂閱模式</a>
+          </div>
+
+          <div class="hero-metrics" aria-label="平台核心定位">
+            <div class="metric">
+              <strong>AI Agent</strong>
+              <span>自動生成報告與評分</span>
             </div>
-            <div class="metric-box">
-                <div style="font-weight:800;">🌍 市場連結碎片化</div>
-                <div style="font-size:0.85rem;">缺乏跨多國市場、具統一基準的在地化分析社群平台。</div>
-                <div style="font-weight:800; margin-top:12px;">🧠 資訊雜訊 + 無量化基準</div>
-                <div style="font-size:0.85rem;">市場報告品質不一，無自動評分過濾機制，投資人被迫使用昂貴/複雜英文工具。</div>
+            <div class="metric">
+              <strong>Global</strong>
+              <span>跨國節點與在地化 Agent</span>
             </div>
+            <div class="metric">
+              <strong>Active</strong>
+              <span>主動提示動態再平衡</span>
+            </div>
+          </div>
         </div>
-        <div style="margin-top: 12px; background:#F1F5F9; padding: 12px; border-radius: 16px;">
-            ✅ <strong>現有解決方案痛點：</strong> Portfolio Visualizer 功能強大但<strong class="highlight">完全無動態再平衡</strong>且無中文/本地諮詢；券商工具陽春；Excel耗時易錯。
-        </div>
-    </div>
 
-    <!-- 2. Proposed Solution -->
-    <div class="section">
-        <div class="section-title"><span>❷</span> Proposed Solution</div>
-        <p><strong>ETF Advisor Fusion</strong> : 大中華區首個完整 ETF 智能顧問平台，核心為 <strong class="highlight">「投資組合大擂台」+ AI Agent 自動化決策流</strong> 。</p>
-        <div class="grid-2col" style="margin-top: 12px;">
-            <div>🔥 <strong>獨家優勢</strong><br>✔ Portfolio Visualizer 等级回測、優化、蒙地卡羅、戰術模型<br>✔ <span class="check">✅ 動態再平衡 (動態規則觸發｜趨勢/波動)</span><br>✔ AI 自動生成分析報告＋自動評分機制<br>✔ 繁體中文 + TradingView 模式跨國社群擴散</div>
-            <div>🚀 <strong>價值主張</strong><br>「告別僵化固定比例，從被動承受風險 ➜ 主動迎擊波動」<br>AI 主動式決策提示：根據動態再平衡訊號，主動提示用戶調整投組配置。</div>
-        </div>
-    </div>
+        <aside class="hero-card" aria-label="平台即時訊號示意">
+          <div class="terminal-card">
+            <div class="terminal-top">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <span>AI Portfolio Intelligence</span>
+            </div>
 
-    <!-- 3. Product Details (擂台+动态再平衡+AI评分) -->
-    <div class="section">
-        <div class="section-title"><span>❸</span> Product Details — 投資組合大擂台</div>
-        <div class="badge-compare">⚔️ 核心引擎 vs. Portfolio Visualizer (PV) 完全比較</div>
-        <table>
-            <thead><tr><th>功能</th><th>Portfolio Visualizer</th><th><strong>投資組合大擂台 (ETF Advisor Fusion)</strong></th></tr></thead>
-            <tbody>
-                <tr><td>績效回測／優化／蒙地卡羅</td><td class="check">✅</td><td class="check">✅ (同等強大)</td></tr>
-                <tr><td>戰術性資產配置 (移動平均/動能)</td><td class="check">✅</td><td class="check">✅ 進階自定義</td></tr>
-                <tr><td>十大懶人投資組合即時監測</td><td class="check">✅</td><td class="check">✅</td></tr>
-                <tr class="highlight"><td><strong>動態再平衡</strong> (條件式加減倉/趨勢觸發)</td><td class="cross">❌ 僅固定比例</td><td class="check">✅ <strong>獨家專利級功能</strong> — AI主動決策提示</td></tr>
-                <tr><td>AI Agent 自動生成投組報告</td><td class="cross">❌</td><td class="check">✅ 每日掃描流量+績效，自動產出深度分析</td></tr>
-                <tr><td>報告自動評分＆品質控管</td><td class="cross">❌</td><td class="check">✅ 過濾雜訊，客觀邏輯評分</td></tr>
-                <tr><td>全球在地化節點 (TradingView模式)</td><td>偏美股為主</td><td class="check">✅ 跨國 (美國/日本/台灣) 社群擴散</td></tr>
-                <tr><td>繁體中文＋本地諮詢/課程</td><td class="cross">❌</td><td class="check">✅ 完整生態系</td></tr>
-            </tbody>
-        </table>
-        <div class="metric-box" style="margin-top: 8px;">
-            💎 <strong>動態再平衡實例：</strong> 可自訂「當某ETF下跌超過10%時自動加倉」或「RSI動能轉弱減碼」等規則進行歷史回測 — Portfolio Visualizer 完全做不到。<br>
-            🤖 <strong>AI Agent 自動化決策流：</strong> 數據輸入(流量/績效掃描) ➜ 自動品管(報告評分) ➜ 自動生成(投組報告) ➜ 主動決策提示用戶再平衡訊號。
-        </div>
-    </div>
+            <div class="signal-line">
+              <div>
+                <b>ETF 資金流量掃描完成</b>
+                <small>偵測申購 / 贖回流向與市場熱度變化</small>
+              </div>
+              <span class="pill">Live</span>
+            </div>
 
-    <!-- 4. Business Model -->
-    <div class="section">
-        <div class="section-title"><span>❹</span> Business Model</div>
-        <div class="grid-2col">
+            <div class="signal-line">
+              <div>
+                <b>研究報告自動評分</b>
+                <small>過濾低品質噪音，保留可比較的量化基準</small>
+              </div>
+              <span class="pill">Score 92</span>
+            </div>
+
+            <div class="signal-line">
+              <div>
+                <b>動態再平衡提示</b>
+                <small>依據市場波動與績效資料，產生主動式配置建議</small>
+              </div>
+              <span class="pill">AI 提醒</span>
+            </div>
+
+            <div class="mini-chart" aria-label="AI 動態再平衡圖表示意">
+              <svg viewBox="0 0 520 210" role="img" aria-label="AI Agent 於波動區間提示再平衡">
+                <defs>
+                  <linearGradient id="areaGreen" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#58bd91" stop-opacity="0.45" />
+                    <stop offset="100%" stop-color="#58bd91" stop-opacity="0.02" />
+                  </linearGradient>
+                </defs>
+                <path d="M0 142 C58 80, 113 84, 168 106 C220 129, 245 174, 302 160 C356 146, 369 92, 428 87 C468 84, 493 104, 520 76 L520 210 L0 210 Z" fill="url(#areaGreen)" />
+                <path d="M0 142 C58 80, 113 84, 168 106 C220 129, 245 174, 302 160 C356 146, 369 92, 428 87 C468 84, 493 104, 520 76" fill="none" stroke="#58bd91" stroke-width="7" stroke-linecap="round" />
+                <path d="M0 116 C80 92, 135 70, 188 115 C237 157, 278 178, 330 144 C383 109, 414 76, 520 55" fill="none" stroke="#d0d8e5" stroke-width="4" opacity="0.65" />
+                <circle class="ai-marker" cx="176" cy="110" r="11" />
+                <circle class="ai-marker" cx="300" cy="160" r="11" />
+                <circle class="ai-marker" cx="430" cy="88" r="11" />
+              </svg>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="problems">
+      <div class="container">
+        <span class="eyebrow">市場問題</span>
+        <h2>ETF 投資人面臨的四個結構性痛點</h2>
+        <p class="lead">
+          傳統工具多半停留在被動查詢與固定比例回測，但 ETF 投資真正需要的是可量化、可追蹤、可比較，並能主動提示使用者的智慧決策平台。
+        </p>
+
+        <div class="problem-grid">
+          <article class="card">
+            <div class="icon">≈</div>
+            <div class="card-number">01</div>
+            <h3>申購流量盲區</h3>
+            <p>一般散戶難以及時追蹤 ETF 資金流向，包括 Inflow / Outflow、申購贖回變化與資金移動熱度，因此容易在市場已偏熱或偏冷後才反應。</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🧠</div>
+            <div class="card-number">02</div>
+            <h3>分析報告過載</h3>
+            <p>市場資訊雜亂、研究報告品質不一，而且缺乏統一的量化標準，投資人難以判斷哪些報告具有真正參考價值。</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">↻</div>
+            <div class="card-number">03</div>
+            <h3>再平衡機制僵化</h3>
+            <p>傳統再平衡工具多半支援固定比例回測，缺少能根據市場波動、績效變化與 ETF 流量訊號調整的動態再平衡機制。</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">◎</div>
+            <div class="card-number">04</div>
+            <h3>市場連結碎片化</h3>
+            <p>不同國家的 ETF 法規、資料標準與投資習慣不同，缺乏能跨市場比較、同時在地化營運的分析與社群平台。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section small" id="rebalancing">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">差異化定位</span>
+          <h2>從被動承受風險，到主動迎擊波動。</h2>
+          <p class="lead">
+            平台不只呈現歷史績效，也不只是顯示靜態配置比例，而是讓 AI Agent 依據市場流量、波動、績效與評等結果，主動提示投資人是否需要重新檢視投組配置。
+          </p>
+          <div class="highlight-box">
+            <p><b>AI 主動式決策提示：</b>當系統偵測到流量、績效或風險結構出現變化時，將以可理解的方式提示使用者調整投組配置，而非讓使用者被動面對數據。</p>
+          </div>
+        </div>
+
+        <div class="rebalancing-board">
+          <div class="chart-panel">
+            <span class="chart-label">傳統機制：固定比例</span>
+            <svg viewBox="0 0 620 210" role="img" aria-label="傳統固定比例再平衡示意圖">
+              <defs>
+                <linearGradient id="grayArea" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#c9d2df" stop-opacity="0.9" />
+                  <stop offset="1" stop-color="#c9d2df" stop-opacity="0.1" />
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="106" x2="620" y2="106" stroke="#df5b5b" stroke-width="5" opacity="0.9" />
+              <path d="M0 112 C74 57, 140 52, 209 98 C270 138, 289 191, 350 169 C414 146, 430 74, 505 62 C558 54, 586 69, 620 32 L620 210 L0 210 Z" fill="url(#grayArea)" />
+              <path d="M0 112 C74 57, 140 52, 209 98 C270 138, 289 191, 350 169 C414 146, 430 74, 505 62 C558 54, 586 69, 620 32" fill="none" stroke="#9aa6b5" stroke-width="5" />
+            </svg>
+          </div>
+
+          <div class="chart-panel">
+            <span class="chart-label">AI 動態再平衡</span>
+            <svg viewBox="0 0 620 250" role="img" aria-label="AI 動態再平衡示意圖">
+              <defs>
+                <linearGradient id="greenArea2" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#58bd91" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#58bd91" stop-opacity="0.04" />
+                </linearGradient>
+              </defs>
+              <path d="M0 160 C76 89, 142 82, 203 116 C260 147, 295 210, 360 196 C424 182, 451 103, 516 93 C565 86, 594 110, 620 70 L620 250 L0 250 Z" fill="url(#greenArea2)" />
+              <path d="M0 160 C76 89, 142 82, 203 116 C260 147, 295 210, 360 196 C424 182, 451 103, 516 93 C565 86, 594 110, 620 70" fill="none" stroke="#41a37d" stroke-width="7" stroke-linecap="round" />
+              <circle class="ai-marker" cx="210" cy="118" r="13" />
+              <circle class="ai-marker" cx="360" cy="196" r="13" />
+              <circle class="ai-marker" cx="520" cy="94" r="13" />
+              <text x="226" y="94" font-size="18" fill="#102033" font-weight="700">AI 介入</text>
+              <text x="377" y="224" font-size="18" fill="#102033" font-weight="700">AI 介入</text>
+              <text x="536" y="118" font-size="18" fill="#102033" font-weight="700">AI 介入</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engine">
+      <div class="container">
+        <span class="eyebrow">核心引擎</span>
+        <h2>AI 智慧代理的自動化決策流</h2>
+        <p class="lead">
+          平台的核心不是單一功能，而是一條完整的 AI Agent 決策鏈：從市場資料輸入，到品質控管、報告生成，最後輸出可被投資人理解與執行的主動決策提示。
+        </p>
+
+        <div class="workflow">
+          <article class="workflow-step">
+            <div class="icon">🗄️</div>
+            <h3>數據輸入</h3>
+            <p>掃描市場流量、ETF 績效、申購贖回資訊與跨市場資料。</p>
+          </article>
+
+          <article class="workflow-step">
+            <div class="icon">🛡️</div>
+            <h3>自動品管</h3>
+            <p>對研究報告與市場資料進行評分、過濾雜訊並檢查資料可信度。</p>
+          </article>
+
+          <article class="workflow-step">
+            <div class="icon">📄</div>
+            <h3>自動生成</h3>
+            <p>產出 ETF 投組分析報告、評分結果與市場摘要。</p>
+          </article>
+
+          <article class="workflow-step">
+            <div class="icon">🎯</div>
+            <h3>主動決策</h3>
+            <p>根據動態再平衡訊號提示使用者檢視配置、風險與下一步行動。</p>
+          </article>
+        </div>
+
+        <div class="engine-grid">
+          <article class="card engine-card">
             <div>
-                <strong>Freemium 分層</strong>
-                <ul style="margin-left: 1.2rem; margin-top: 8px;">
-                    <li>免費版：基礎ETF評等、申購快報、固定比例回測</li>
-                    <li><strong>專業版 (NT$499/月｜約$16 USD)</strong>：AI 深度報告(含評分)、動態再平衡決策引擎、全球AI診斷、績效大擂台參賽權</li>
-                </ul>
+              <div class="engine-visual"></div>
+              <strong>市場資訊整合</strong>
+              <p>將分散於各市場的 ETF 資金流、績效與研究內容整合至統一資料層，降低資訊破碎造成的判斷成本。</p>
             </div>
+          </article>
+
+          <article class="card engine-card">
             <div>
-                <strong>其他收入</strong>
-                <ul style="margin-left: 1.2rem;">
-                    <li>一對一專業諮詢 NT$2,000/小時</li>
-                    <li>企業方案 (API/內部訓練)</li>
-                    <li>線上研討會/課程售票</li>
-                </ul>
+              <div class="engine-visual"></div>
+              <strong>報告評分與品質控管</strong>
+              <p>系統自動對每份產出的報告進行客觀評分，避免低品質內容干擾投資判斷，保留可追蹤、可解釋的分析結果。</p>
             </div>
-        </div>
-        <div class="flex-stats">
-            <div class="stat-card">📊 毛利率 >75%</div>
-            <div class="stat-card">💡 LTV NT$12,000 &nbsp;|&nbsp; CAC NT$2,500</div>
-            <div class="stat-card">🔄 升級率因動態再平衡提升 30% (預估)</div>
-        </div>
-        <p style="margin-top: 12px; font-size:0.85rem;">透過高品質報告分享驅動社群擴散，實現規模化訂閱增長 (TradingView 病毒式閉環)。</p>
-    </div>
+          </article>
 
-    <!-- 5. Market Opportunity -->
-    <div class="section">
-        <div class="section-title"><span>❺</span> Market Opportunity</div>
-        <p><strong>TAM (台灣+香港+新加坡 ETF 主動型投資人)</strong> 約 80 萬人，每人年均潛在花費 NT$3,000 ⇒ <strong>NT$24B (約8億美元)</strong>  市場規模。</p>
-        <p><strong>Portfolio Visualizer 台灣用戶估算：</strong> 5,000～10,000 高價值專業戶，為直接轉換目標。<br>
-        <strong>目標：</strong> 3年內取得 5% SAM → 年營收 NT$1.2億。</p>
-        <div class="badge-compare">📈 全球ETF資產12兆美元，亞太年複合成長>15%</div>
-    </div>
+          <article class="card engine-card">
+            <div>
+              <div class="engine-visual"></div>
+              <strong>高品質投資分析</strong>
+              <p>每日主動掃描市場流量與績效，自動生成專業深度報告，協助投資人從資料過載走向決策清晰。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <!-- 6. Competition (强化版 + 动态再平衡唯一性) -->
-    <div class="section">
-        <div class="section-title"><span>❻</span> Competition & 護城河</div>
-        <table>
-            <thead><tr><th>競爭者</th><th>動態再平衡</th><th>AI報告+評分</th><th>中文/在地生態</th><th>我們優勢</th></tr></thead>
+    <section class="section" id="comparison">
+      <div class="container">
+        <span class="eyebrow">世代落差</span>
+        <h2>新平台對傳統投資工具的降維打擊</h2>
+        <p class="lead">
+          相較於一般金融網站與傳統回測工具，ETF 社群交易平台主打 AI 主動提示、自動報告、品管機制、全球在地化與深度流量分析。
+        </p>
+
+        <div class="comparison-wrap">
+          <table aria-label="ETF 社群交易平台與傳統工具比較表">
+            <thead>
+              <tr>
+                <th>核心功能</th>
+                <th>Portfolio Visualizer</th>
+                <th>一般金融網站</th>
+                <th class="featured-col">ETF 社群交易平台</th>
+              </tr>
+            </thead>
             <tbody>
-                <tr><td><strong>Portfolio Visualizer</strong></td><td class="cross">❌</td><td class="cross">❌</td><td class="cross">❌</td><td rowspan="3">✅ 唯一華語市場完整PV級功能+動態再平衡+AI Agent閉環</td></tr>
-                <tr><td>券商免費工具 (元大/富邦)</td><td class="cross">❌</td><td class="cross">❌</td><td>⚠️ 部分</td></tr>
-                <tr><td>MoneyDJ / CMoney</td><td class="cross">❌</td><td class="cross">❌</td><td>✅</td></tr>
+              <tr>
+                <td>動態再平衡</td>
+                <td><span class="no">✕</span> 僅固定比例</td>
+                <td><span class="no">✕</span></td>
+                <td class="featured-col"><span class="yes">✓</span> AI 主動提示</td>
+              </tr>
+              <tr>
+                <td>AI Agent 自動報告</td>
+                <td><span class="no">✕</span></td>
+                <td><span class="no">✕</span></td>
+                <td class="featured-col"><span class="yes">✓</span> 主動生成</td>
+              </tr>
+              <tr>
+                <td>分析報告評分機制</td>
+                <td><span class="no">✕</span></td>
+                <td><span class="no">✕</span></td>
+                <td class="featured-col"><span class="yes">✓</span> 自動品管</td>
+              </tr>
+              <tr>
+                <td>全球在地化擴張</td>
+                <td><span class="warn">⚠</span> 偏美股</td>
+                <td><span class="no">✕</span> 單一市場</td>
+                <td class="featured-col"><span class="yes">✓</span> TradingView 模式</td>
+              </tr>
+              <tr>
+                <td>流量大數據分析</td>
+                <td><span class="no">✕</span></td>
+                <td><span class="yes">✓</span> 基礎資訊</td>
+                <td class="featured-col"><span class="yes">✓</span> 深度週報 / 月報</td>
+              </tr>
             </tbody>
-        </table>
-        <p><strong>✔ 差異化總結：</strong> ETF Advisor Fusion = Portfolio Visualizer 所有功能 + 獨家動態再平衡 + AI生成/評分報告 + 社群TradingView模式 + 華人市場零距離。</p>
-    </div>
-
-    <!-- 7. Growth Strategy -->
-    <div class="section">
-        <div class="section-title"><span>❼</span> Growth Strategy</div>
-        <div class="grid-2col">
-            <div><strong>🎯 種子期 (0-6個月)</strong><br>- 針對 PV 台灣用戶發送比較指南+遷移優惠<br>- SEO + ETF 電子報 (已破900人)<br>- 動態再平衡白皮書下載</div>
-            <div><strong>🚀 擴張期 (6-12個月)</strong><br>- 付費廣告(Google/FB 理財關鍵字)<br>- KOL合作 + 「動態再平衡挑戰賽」<br>- 社群分享高分報告擴散</div>
-            <div><strong>🌏 規模期 (2-3年)</strong><br>- 嵌入券商/銀行財管部門<br>- 日本、美國在地化節點上線 (TradingView模式)</div>
+          </table>
         </div>
-        <div class="metric-box" style="margin-top:12px;">📈 預估付費用戶 MoM +15~20%，第一年達 2,500 訂閱戶，第二年 7,200 戶。</div>
-    </div>
+      </div>
+    </section>
 
-    <!-- 8. Current Traction -->
-    <div class="section">
-        <div class="section-title"><span>❽</span> Current Traction & 里程碑</div>
-        <div class="flex-stats">
-            <div class="stat-card">📧 電子報訂閱 <strong>>900</strong></div>
-            <div class="stat-card">🌐 月活躍用戶 ~6,000</div>
-            <div class="stat-card">💎 付費用戶(早期) <strong>67人</strong></div>
-            <div class="stat-card">⭐ NPS +52</div>
-        </div>
-        <div class="flex-stats">
-            <div class="stat-card">📉 季度流失率 <5%</div>
-            <div class="stat-card">💰 CAC 初期僅 NT$500 (內容SEO)</div>
-            <div class="stat-card">🔄 LTV NT$12,000</div>
-        </div>
-        <ul style="margin-top: 12px;">
-            <li>✅ MVP已完成內測，核心ETF評等引擎穩定運行</li>
-            <li>✅ AI Agent報告生成＋評分系統上線</li>
-            <li>✅ 績效大擂台與動態再平衡回測模組驗證完成</li>
-            <li>🎯 已有 Portfolio Visualizer 進階用戶主動詢問轉移方案</li>
-        </ul>
-    </div>
+    <section class="section" id="global">
+      <div class="container">
+        <span class="eyebrow">跨國版圖</span>
+        <h2>構建 ETF 領域的 TradingView 模式</h2>
+        <p class="lead">
+          平台以全球統一節點架構作為核心，搭配跨國在地化節點與在地 Agent，讓 ETF 分析、社群連動與法規適配能夠同時擴張。
+        </p>
 
-    <!-- 9. Financials -->
-    <div class="section">
-        <div class="section-title"><span>❾</span> Financials (3年預估)</div>
-        <table>
-            <thead><tr><th>項目</th><th>第1年</th><th>第2年</th><th>第3年</th></tr></thead>
-            <tbody>
-                <tr><td>付費訂閱人數</td><td>2,500</td><td>7,200</td><td>15,000</td></tr>
-                <tr><td>年營收 (NT$)</td><td>4.2M</td><td>14.5M</td><td>32.0M</td></tr>
-                <tr><td>毛利率</td><td>72%</td><td>78%</td><td>82%</td></tr>
-                <tr><td>營業利潤率</td><td>-15%</td><td>18%</td><td>38%</td></tr>
-            </tbody>
-        </table>
-        <div class="badge-compare">💰 損益兩平點：第18個月。假設合理，動態再平衡功能驅動升級與續訂率提升。</div>
-    </div>
+        <div class="global-map">
+          <article class="map-node">
+            <h3>跨國在地化節點</h3>
+            <p>利用 AI Agent 的多語言處理與各國法規適應能力，快速部署海外市場，降低跨境投資資訊落差。</p>
+          </article>
 
-    <!-- 10. Team -->
-    <div class="section">
-        <div class="section-title"><span>❿</span> Team</div>
-        <div class="grid-2col">
-            <div><strong>👤 創辦人/CEO</strong> — 10年資產管理經驗，前投信ETF部門主管，深知PV痛點與法人缺口。</div>
-            <div><strong>💻 技術負責人</strong> — 全端工程師，曾開發金融機構分析平台，主導投資組合大擂台架構。</div>
-            <div><strong>📘 內容與教育總監</strong> — 財經記者+講師，CFA Level II，負責AI報告品管與在地化內容。</div>
-            <div><strong>🧠 顧問群</strong> — 財務工程教授+退休券商副總，強化模型專利與合規。</div>
-        </div>
-        <div style="margin-top: 12px;"><span class="pillar">🏆 專利/獎項</span> 動態再平衡演算法申請中 | 台灣財經應用創新獎優勝 | 入選AWS金融加速器</div>
-    </div>
+          <article class="map-center">
+            <div>
+              <h3>全球連動節點架構</h3>
+              <p>以統一 ETF 量化指標與審核標準，建立可被不同國家市場共同使用的分析底層。</p>
+            </div>
+          </article>
 
-    <!-- 11. Current Funding Status -->
-    <div class="section">
-        <div class="section-title"><span>⓫</span> Current Funding Status</div>
-        <div class="grid-2col">
-            <div><strong>階段</strong> : Pre-seed → Seed<br>
-            <strong>已募集資金</strong> : NT$1.2M (自籌+種子天使)<br>
-            <strong>本次募資金額</strong> : <span class="highlight">NT$6M (約20萬美元)</span><br>
-            <strong>Runway</strong> : 18個月</div>
-            <div><strong>資金部署規劃</strong><br>
-            ✔ 技術團隊擴充(2人)<br>
-            ✔ 針對Portfolio Visualizer用戶精準行銷<br>
-            ✔ 動態再平衡專利優化與AI Agent迭代<br>
-            ✔ 香港/新加坡節點初期落地</div>
-        </div>
-        <div class="metric-box" style="margin-top: 10px;">🎯 關鍵里程碑 (資金到位後6個月)：付費用戶達1,000人，其中至少15-20%從Portfolio Visualizer 轉換，啟動首個海外節點(美國/日本)。</div>
-        <div style="margin-top: 8px;">🌱 成長飛輪 : AI生成優質報告 ➜ 跨國社群擴散 ➜ 免費流量轉換訂閱 ➜ 更多數據強化AI引擎 ➜ 獨佔華語動態再平衡市場。</div>
-    </div>
+          <article class="map-node">
+            <h3>在地化 Agent</h3>
+            <p>針對不同市場的 ETF 商品、監管規範與投資偏好產出專屬報告，提高在地化可信度。</p>
+          </article>
 
-    <!-- 总结 + 联络资讯 -->
-    <div class="section" style="background: #f9fcff;">
-        <div class="section-title"><span>✨</span> Investment highlights & Contact</div>
-        <p><strong>一句話投資亮點：</strong> 華語世界第一個「AI驅動＋動態再平衡」ETF完整生態系，直接降維打擊Portfolio Visualizer與傳統券商工具，擁有獨家再平衡引擎及自動化智慧報告評分，目標成為ETF領域的TradingView。</p>
-        <div class="footer-contact">
-            <div><strong>📧 聯絡人</strong> : ✉️ hello@etf.com.tw</div>
-            <div><strong>🌐 官網</strong> : https://etf.com.tw<br>📱 掃描QR Code 或 來信獲取完整簡報</div>
+          <article class="map-node" style="grid-column: 2 / 3;">
+            <h3>跨國社群連動</h3>
+            <p>仿照 TradingView 的全球高手排行與內容擴散模式，讓高品質報告形成可分享、可傳播、可累積聲望的社群資產。</p>
+          </article>
         </div>
-        <p style="text-align: center; margin-top: 10px; font-size: 0.7rem; color:#4a627a;">Startup World Cup 2025 — ETF Advisor Fusion : 重塑全球ETF主動投資決策方式</p>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <span class="eyebrow">商業模式</span>
+        <h2>從免費流量，到高黏著度訂閱。</h2>
+        <p class="lead">
+          平台採 Freemium 模式吸引用戶進入，再透過 AI Agent 深度分析、動態再平衡與全球市場診斷，推動專業版訂閱轉化。
+        </p>
+
+        <div class="pricing">
+          <article class="price-card">
+            <div class="price-title">
+              <h3>免費版</h3>
+              <span>Freemium</span>
+            </div>
+            <ul class="feature-list">
+              <li>基礎 ETF 評等查詢</li>
+              <li>每日申購流量快報</li>
+              <li>固定比例基礎回測工具</li>
+              <li>社群報告瀏覽與分享</li>
+            </ul>
+          </article>
+
+          <article class="price-card premium">
+            <div class="price-title">
+              <h3>專業版</h3>
+              <span>Premium Subscription</span>
+            </div>
+            <ul class="feature-list">
+              <li>AI Agent 深度分析報告與自動評分</li>
+              <li>動態再平衡決策引擎</li>
+              <li>全球市場 AI 診斷權限</li>
+              <li>績效競技場與播台參賽權</li>
+              <li>週報、月報與主題式 ETF 監控</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+          <p><b>成長策略：</b>透過「高品質報告分享」驅動社群擴散，將免費流量導入專業版功能，逐步形成規模化訂閱收入。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section small" id="flywheel">
+      <div class="container">
+        <span class="eyebrow">成長飛輪</span>
+        <h2>AI、社群與變現的無縫閉環</h2>
+
+        <div class="flywheel">
+          <div class="wheel" aria-label="成長飛輪示意圖">
+            <div class="wheel-label one">AI 生成優質報告</div>
+            <div class="wheel-label two">跨國社群擴散</div>
+            <div class="wheel-label three">專業版訂閱轉化</div>
+          </div>
+
+          <div>
+            <article class="card" style="margin-bottom: 18px;">
+              <h3>1. AI 生成優質報告</h3>
+              <p>AI Agent 自動產出報告、評分並過濾雜訊，讓內容品質可被量化與比較。</p>
+            </article>
+            <article class="card" style="margin-bottom: 18px;">
+              <h3>2. 跨國社群擴散</h3>
+              <p>使用者分享高分報告，透過類 TradingView 的社群機制吸引免費流量與內容互動。</p>
+            </article>
+            <article class="card">
+              <h3>3. 專業版訂閱轉化</h3>
+              <p>深度分析、動態再平衡與全球診斷功能提升黏著度，推動 B2C 變現與資金回流，進一步優化 AI 引擎。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="container">
+        <span class="eyebrow">現狀與未來動能</span>
+        <h2>MVP 已完成開發並通過內測，下一步進入海外節點部署。</h2>
+
+        <div class="roadmap">
+          <article class="mvp-box">
+            <div>
+              <strong>MVP</strong>
+              <p>已完成開發並通過內測</p>
+            </div>
+          </article>
+
+          <article class="milestone-card">
+            <h3>近期里程碑</h3>
+            <ul class="milestones">
+              <li><span class="check">✓</span><span>核心 ETF 評等引擎穩定運行</span></li>
+              <li><span class="check">✓</span><span>AI Agent 報告生成與評分系統上線</span></li>
+              <li><span class="check">✓</span><span>績效競技場與動態再平衡回測模組驗證</span></li>
+              <li><span class="check rocket">🚀</span><span>下一階段：部署首個海外在地化節點，例如美國與日本市場</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section small" id="contact">
+      <div class="container">
+        <div class="cta">
+          <span class="eyebrow" style="background: rgba(255,255,255,0.14); color: white; border-color: rgba(255,255,255,0.22);">Join the ETF AI Revolution</span>
+          <h2>引領下一個 ETF 投資十年。</h2>
+          <p class="lead">我們將複雜變簡單，將數據變決策。邀請您參與這場基於 AI Agent 的全球金融革命。</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="mailto:founder@etf-community.com?subject=我想加入 ETF 社群交易平台等待名單">聯繫 founder@etf-community.com</a>
+            <a class="btn btn-ghost" href="https://www.etf-community.com" target="_blank" rel="noopener">前往官方網站</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top">
+          <span class="brand-mark">ETF</span>
+          <span>ETF 社群交易平台</span>
+        </a>
+        <small>© 2026 ETF Community. All rights reserved.</small>
+        <small>官方網站：www.etf-community.com｜聯繫我們：founder@etf-community.com</small>
+      </div>
+      <div>
+        <small>免責聲明：本網站內容僅作為產品展示與一般資訊說明，不構成任何投資建議、買賣建議或收益保證。投資 ETF 仍涉及市場風險，使用者應自行評估並承擔投資決策責任。</small>
+      </div>
     </div>
-</div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      menuBtn.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.textContent = "☰";
+      });
+    });
+  </script>
 </body>
 </html>
