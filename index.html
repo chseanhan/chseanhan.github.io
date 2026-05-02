@@ -1,1157 +1,142 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETF Advisor Fusion | Intelligent ETF Advisory Platform</title>
-
-  <style>
-    :root {
-      --navy: #0f2742;
-      --blue: #1f5f8b;
-      --cyan: #35a7c9;
-      --light-blue: #eaf6fb;
-      --gray: #64748b;
-      --dark: #0f172a;
-      --white: #ffffff;
-      --card: #f8fafc;
-      --border: #dbe4ee;
-      --green: #14b8a6;
-      --orange: #f59e0b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      background: #ffffff;
-      color: var(--dark);
-      line-height: 1.7;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(15, 39, 66, 0.96);
-      backdrop-filter: blur(12px);
-      color: var(--white);
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      color: white;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      font-size: 14px;
-      color: #dbeafe;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    .hero {
-      min-height: 86vh;
-      display: flex;
-      align-items: center;
-      color: white;
-      background:
-        linear-gradient(135deg, rgba(15,39,66,0.96), rgba(31,95,139,0.88)),
-        radial-gradient(circle at top right, rgba(53,167,201,0.4), transparent 35%),
-        linear-gradient(120deg, #0f2742, #163c63);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-      right: -130px;
-      top: -80px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 850px;
-      padding: 90px 0;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 999px;
-      color: #dff8ff;
-      background: rgba(255,255,255,0.08);
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 82px);
-      line-height: 1.05;
-      margin-bottom: 24px;
-      letter-spacing: -1.5px;
-    }
-
-    .hero p {
-      font-size: clamp(18px, 2.4vw, 26px);
-      color: #e0f2fe;
-      max-width: 760px;
-      margin-bottom: 34px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: var(--cyan);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #2095b7;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.32);
-      color: white;
-      background: rgba(255,255,255,0.08);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.16);
-      transform: translateY(-2px);
-    }
-
-    section {
-      padding: 86px 0;
-    }
-
-    .section-light {
-      background: var(--light-blue);
-    }
-
-    .section-title {
-      max-width: 780px;
-      margin-bottom: 42px;
-    }
-
-    .eyebrow {
-      color: var(--blue);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.18;
-      color: var(--navy);
-      margin-bottom: 16px;
-    }
-
-    .section-title p {
-      color: var(--gray);
-      font-size: 18px;
-    }
-
-    .grid {
-      display: grid;
-      gap: 24px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 16px 40px rgba(15, 39, 66, 0.07);
-    }
-
-    .card h3 {
-      color: var(--navy);
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: var(--gray);
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--blue), var(--cyan));
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-
-    .problem-box {
-      background: linear-gradient(135deg, #102a45, #1f5f8b);
-      color: white;
-      border-radius: 28px;
-      padding: 42px;
-      box-shadow: 0 24px 60px rgba(15,39,66,0.22);
-    }
-
-    .problem-box h3 {
-      font-size: 30px;
-      margin-bottom: 18px;
-    }
-
-    .problem-box p {
-      color: #dbeafe;
-      font-size: 18px;
-      margin-bottom: 18px;
-    }
-
-    .list {
-      list-style: none;
-      margin-top: 18px;
-    }
-
-    .list li {
-      padding: 12px 0 12px 34px;
-      position: relative;
-      color: #475569;
-    }
-
-    .list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      top: 12px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--green);
-      color: white;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-    }
-
-    .dark-list li {
-      color: #e0f2fe;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 30px;
-    }
-
-    .stat {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 32px;
-      color: white;
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      color: #dbeafe;
-      font-size: 14px;
-    }
-
-    .feature-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::after {
-      content: "";
-      position: absolute;
-      right: -60px;
-      top: -60px;
-      width: 140px;
-      height: 140px;
-      background: rgba(53,167,201,0.12);
-      border-radius: 50%;
-    }
-
-    .timeline {
-      position: relative;
-      display: grid;
-      gap: 22px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 26px;
-      align-items: start;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 26px;
-    }
-
-    .timeline-stage {
-      color: var(--blue);
-      font-weight: 900;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .timeline-item h3 {
-      color: var(--navy);
-      margin-bottom: 8px;
-      font-size: 22px;
-    }
-
-    .timeline-item p {
-      color: var(--gray);
-    }
-
-    .business-model {
-      background: var(--navy);
-      color: white;
-      border-radius: 30px;
-      padding: 44px;
-    }
-
-    .business-model h2 {
-      color: white;
-    }
-
-    .business-model .section-title p {
-      color: #cbd5e1;
-    }
-
-    .model-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 22px;
-      padding: 26px;
-    }
-
-    .model-card h3 {
-      color: white;
-      margin-bottom: 10px;
-    }
-
-    .model-card p {
-      color: #dbeafe;
-    }
-
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(15, 39, 66, 0.07);
-      background: white;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-      padding: 18px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-
-    .comparison-table th {
-      background: var(--navy);
-      color: white;
-      font-size: 15px;
-    }
-
-    .comparison-table td {
-      color: #475569;
-    }
-
-    .comparison-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #e0f2fe;
-      color: var(--blue);
-      font-weight: 800;
-      font-size: 12px;
-    }
-
-    .cta {
-      background:
-        linear-gradient(135deg, rgba(15,39,66,0.98), rgba(31,95,139,0.92)),
-        radial-gradient(circle at top right, rgba(53,167,201,0.5), transparent 35%);
-      color: white;
-      text-align: center;
-      padding: 90px 0;
-    }
-
-    .cta h2 {
-      color: white;
-      margin-bottom: 18px;
-    }
-
-    .cta p {
-      color: #dbeafe;
-      max-width: 760px;
-      margin: 0 auto 32px;
-      font-size: 18px;
-    }
-
-    footer {
-      background: #081827;
-      color: #94a3b8;
-      padding: 34px 0;
-      font-size: 14px;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .disclaimer {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      border-radius: 18px;
-      padding: 20px;
-      margin-top: 24px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 860px) {
-      .nav {
-        align-items: flex-start;
-        gap: 14px;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .grid-2,
-      .grid-3,
-      .grid-4,
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      section {
-        padding: 64px 0;
-      }
-
-      .problem-box,
-      .business-model {
-        padding: 28px;
-      }
-
-      .comparison-table {
-        font-size: 14px;
-      }
-
-      .comparison-table th,
-      .comparison-table td {
-        padding: 14px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETF 社群交易平台 - AI Agent 驅動的全球化投資生態系</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f7f9; }
+        header { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; padding: 60px 20px; text-align: center; }
+        section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+        h1 { margin: 0; font-size: 2.5em; }
+        h2 { border-left: 5px solid #1a2a6c; padding-left: 15px; color: #1a2a6c; margin-top: 40px; }
+        .card-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+        .card { background: white; border-radius: 8px; padding: 20px; flex: 1 1 calc(45% - 20px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #1a2a6c; color: white; }
+        .highlight { color: #b21f1f; font-weight: bold; }
+        .footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        .price-table { display: flex; gap: 20px; }
+        .price-box { border: 2px solid #1a2a6c; border-radius: 10px; padding: 20px; flex: 1; background: #fff; }
+        .price-box h3 { text-align: center; color: #1a2a6c; }
+    </style>
 </head>
-
 <body>
 
-  <header>
-    <div class="container nav">
-      <a href="#top" class="brand">
-        <div class="brand-mark">ETF</div>
-        <span>ETF Advisor Fusion</span>
-      </a>
+<header>
+    <h1>ETF 社群交易平台 [cite: 1]</h1>
+    <p>AI Agent 驅動的全球化投資生態系 [cite: 2]</p>
+    <p>主動分析報告 · 智慧評分機制 · 多國在地化平台 [cite: 3]</p>
+</header>
 
-      <nav class="nav-links">
-        <a href="#problem">痛點</a>
-        <a href="#solution">解決方案</a>
-        <a href="#product">產品功能</a>
-        <a href="#business">商業模式</a>
-        <a href="#market">市場機會</a>
-        <a href="#funding">募資狀態</a>
-      </nav>
+<section>
+    <h2>解決投資痛點 [cite: 5, 8, 10, 12]</h2>
+    <div class="card-container">
+        <div class="card">
+            <h3>1. 申購流量盲區 [cite: 5]</h3>
+            <p>一般散戶難以即時追蹤資金流向 (Inflow/Outflow)，無法察覺法人大戶佈局先機 [cite: 6]。</p>
+        </div>
+        <div class="card">
+            <h3>2. 分析報告過載 [cite: 8]</h3>
+            <p>市場資訊雜亂且缺乏統一量化基準，投資人難以判斷研究報告真實價值 [cite: 9]。</p>
+        </div>
+        <div class="card">
+            <h3>3. 再平衡機制僵化 [cite: 10]</h3>
+            <p>傳統工具僅支援固定比例回測，缺乏應對劇烈波動的「動態再平衡」 [cite: 11]。</p>
+        </div>
+        <div class="card">
+            <h3>4. 市場連結碎片化 [cite: 12]</h3>
+            <p>缺乏跨國市場、統一評價標準且在地化營運的分析社群平台 [cite: 13]。</p>
+        </div>
     </div>
-  </header>
+</section>
 
-  <main id="top">
+<section>
+    <h2>核心技術：AI 智慧代理引擎 [cite: 31, 37]</h2>
+    <ul>
+        <li><strong>數據輸入：</strong> 每日主動掃描市場流量與績效 [cite: 35, 38]。</li>
+        <li><strong>自動品管：</strong> 系統自動對報告進行客觀評分，確保邏輯嚴謹並過濾雜訊 [cite: 33, 39]。</li>
+        <li><strong>自動生成：</strong> 自動產出高品質投資分析與投組報告 [cite: 34, 40]。</li>
+        <li><strong>主動決策：</strong> 根據動態再平衡訊號，主動提示用戶調整配置，而非被動顯示數據 [cite: 17, 41]。</li>
+    </ul>
+</section>
 
-    <section class="hero">
-      <div class="container hero-content">
-        <span class="badge">Intelligent Financial Literacy for Smarter ETF Investing</span>
-        <h1>ETF Advisor Fusion</h1>
-        <p>
-          ETF Advisor Fusion 是一個整合 ETF 資料、投資分析、AI 個人化推薦與金融教育內容的智慧型 ETF 投資顧問平台，
-          目標是幫助自主管理投資組合的投資人做出更理性、更有紀律、更具風險意識的 ETF 投資決策。
-        </p>
-
-        <div class="hero-actions">
-          <a href="#product" class="btn btn-primary">探索產品功能</a>
-          <a href="#business" class="btn btn-secondary">了解商業模式</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="problem">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Problem Statement</div>
-          <h2>散戶 ETF 投資人面臨資訊分散、缺乏個人化與分析能力不足的問題</h2>
-          <p>
-            ETF 市場快速成長，但一般投資人仍常在零散資料、有限工具與缺乏風險管理框架的情況下做決策。
-          </p>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="problem-box">
-            <h3>核心痛點</h3>
-            <p>
-              散戶投資人通常需要在不同網站、券商平台、研究報告與新聞來源之間切換，才能取得 ETF 相關資訊。
-              這種碎片化流程不只降低效率，也容易造成投資判斷不完整。
-            </p>
-
-            <ul class="list dark-list">
-              <li>ETF 資訊分散，難以快速比較不同產品的費用、風險與配置差異。</li>
-              <li>投資建議缺乏個人化，難以符合不同投資人的風險承受度、投資期間與財務目標。</li>
-              <li>投資組合分析工具不足，導致資產配置、集中度與風險暴露不易被清楚掌握。</li>
-              <li>金融知識落差使投資人容易追逐短期績效，而忽略長期紀律與風險控管。</li>
-            </ul>
-
-            <div class="stats">
-              <div class="stat">
-                <strong>Fragmented</strong>
-                <span>資訊來源分散</span>
-              </div>
-              <div class="stat">
-                <strong>Limited</strong>
-                <span>分析工具有限</span>
-              </div>
-              <div class="stat">
-                <strong>Weak</strong>
-                <span>風險管理不足</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="icon">!</div>
-            <h3>為什麼這個問題重要？</h3>
-            <p>
-              ETF 雖然通常被視為成本較低、分散性較佳的投資工具，但「買 ETF」並不等於「自動擁有良好的投資組合」。
-              投資人仍需要理解 ETF 追蹤標的、費用率、產業或區域集中度、波動風險、重疊持股與投資目標是否一致。
-            </p>
-
-            <ul class="list">
-              <li>缺乏 ETF 比較能力，可能導致投資人買進高度相似或重疊的產品。</li>
-              <li>缺乏風險分析，可能導致投資組合在特定產業、國家或因子上過度集中。</li>
-              <li>缺乏金融教育，可能導致投資人被短期市場波動影響而做出非理性決策。</li>
-              <li>缺乏個人化洞察，可能使投資策略與個人目標不匹配。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="solution" class="section-light">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Proposed Solution</div>
-          <h2>整合資料、分析與個人化建議的 ETF 智慧顧問平台</h2>
-          <p>
-            ETF Advisor Fusion 透過單一平台整合 ETF 資訊、投資組合分析、AI 推薦與金融教育內容，
-            讓投資人能以更清楚的資料基礎做出 ETF 投資決策。
-          </p>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <div class="icon">📊</div>
-            <h3>Data Integration</h3>
-            <p>
-              將 ETF 相關資訊整合到同一個介面中，協助投資人快速查看產品特性、比較不同 ETF，
-              並降低跨平台蒐集資料所造成的時間成本。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🧠</div>
-            <h3>AI Recommendations</h3>
-            <p>
-              根據使用者的投資偏好、風險承受能力與投資目標，產生更具個人化的 ETF 建議，
-              避免傳統平台只提供通用型資訊的限制。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🎓</div>
-            <h3>Financial Literacy</h3>
-            <p>
-              透過教育中心強化 ETF 與投資基礎知識，幫助投資人理解產品、風險與長期資產配置觀念，
-              提升金融素養與決策品質。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="product">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Product Details</div>
-          <h2>五大核心產品模組</h2>
-          <p>
-            平台由 ETF Dashboard、Portfolio Analytics、AI Recommendations、Education Hub 與 Personalized Insights 組成，
-            形成一套從資訊理解、組合檢視到投資建議的完整 ETF 決策流程。
-          </p>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card feature-card">
-            <div class="icon">01</div>
-            <h3>ETF Dashboard</h3>
-            <p>
-              ETF 儀表板提供集中化的 ETF 資訊檢視介面，讓使用者能快速掌握 ETF 的基本資料、
-              市場表現、產品分類與關鍵投資特徵。
-            </p>
-            <ul class="list">
-              <li>集中呈現 ETF 相關資訊，降低資訊搜尋成本。</li>
-              <li>支援不同 ETF 之間的快速比較。</li>
-              <li>協助使用者理解產品特性與投資定位。</li>
-            </ul>
-          </div>
-
-          <div class="card feature-card">
-            <div class="icon">02</div>
-            <h3>Portfolio Analytics</h3>
-            <p>
-              投資組合分析模組協助使用者檢視現有 ETF 配置，理解投資組合的風險結構、
-              分散程度與可能的集中風險。
-            </p>
-            <ul class="list">
-              <li>分析 ETF 投資組合的整體配置狀況。</li>
-              <li>協助使用者辨識過度集中或重疊暴露。</li>
-              <li>支援更有紀律的風險管理流程。</li>
-            </ul>
-          </div>
-
-          <div class="card feature-card">
-            <div class="icon">03</div>
-            <h3>AI Recommendations</h3>
-            <p>
-              AI 推薦系統根據使用者的投資目標、偏好與風險特徵，提供較符合個人需求的 ETF 建議，
-              使平台不同於單純資料查詢工具。
-            </p>
-            <ul class="list">
-              <li>根據使用者特徵產生個人化 ETF 建議。</li>
-              <li>協助投資人避免只依賴熱門排行榜或短期績效做決策。</li>
-              <li>將資料分析轉化為可行的投資洞察。</li>
-            </ul>
-          </div>
-
-          <div class="card feature-card">
-            <div class="icon">04</div>
-            <h3>Education Hub</h3>
-            <p>
-              教育中心提供 ETF 投資與金融素養相關內容，協助使用者理解費用、分散投資、風險、
-              長期投資與資產配置等重要觀念。
-            </p>
-            <ul class="list">
-              <li>建立使用者對 ETF 的基礎理解。</li>
-              <li>降低新手投資人的知識門檻。</li>
-              <li>透過內容建立平台信任與長期使用黏著度。</li>
-            </ul>
-          </div>
-
-          <div class="card feature-card">
-            <div class="icon">05</div>
-            <h3>Personalized Insights</h3>
-            <p>
-              個人化洞察將使用者的投資組合、目標與市場資訊結合，提供更精準的提醒與分析，
-              幫助使用者持續優化 ETF 投資策略。
-            </p>
-            <ul class="list">
-              <li>針對使用者投資狀況提供客製化分析。</li>
-              <li>協助追蹤投資組合是否仍符合目標。</li>
-              <li>將複雜資訊轉化為清楚、可理解的洞察。</li>
-            </ul>
-          </div>
-
-          <div class="card feature-card">
-            <div class="icon">★</div>
-            <h3>Integrated Experience</h3>
-            <p>
-              ETF Advisor Fusion 的價值不只是單一功能，而是將 ETF 資料、分析、推薦與教育整合成一個連續的使用者體驗。
-            </p>
-            <ul class="list">
-              <li>從資訊蒐集到決策建議一站完成。</li>
-              <li>同時服務新手與進階 ETF 投資人。</li>
-              <li>以 ETF 投資場景為核心，而非泛用型理財平台。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="business" class="section-light">
-      <div class="container">
-        <div class="business-model">
-          <div class="section-title">
-            <div class="eyebrow" style="color:#67e8f9;">Business Model</div>
-            <h2>Freemium、B2B API/Data Licensing 與機構合作的混合商業模式</h2>
-            <p>
-              ETF Advisor Fusion 的營收設計不只依賴一般使用者訂閱，也包含面向企業客戶的資料授權與機構合作。
-            </p>
-          </div>
-
-          <div class="grid grid-3">
-            <div class="model-card">
-              <h3>Freemium Subscription</h3>
-              <p>
-                以免費版本吸引用戶進入平台，提供基礎 ETF 資訊與教育內容；
-                進階功能則可透過訂閱制提供，例如更完整的投資組合分析、進階 AI 建議與個人化洞察。
-              </p>
-            </div>
-
-            <div class="model-card">
-              <h3>B2B API / Data Licensing</h3>
-              <p>
-                將 ETF 資料、分析能力或推薦模組以 API 或資料授權方式提供給金融科技公司、
-                投資平台、券商或其他金融服務機構使用。
-              </p>
-            </div>
-
-            <div class="model-card">
-              <h3>Institutional Partnerships</h3>
-              <p>
-                與金融機構、教育平台、券商或投資服務提供者合作，
-                透過共同推廣、平台整合或白標服務擴大市場覆蓋。
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="market">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Market Opportunity</div>
-          <h2>全球 ETF 市場規模龐大，自主投資工具需求持續上升</h2>
-          <p>
-            PDF 中指出，全球 ETF 市場資產管理規模已超過 10 兆美元，同時市場對自主管理投資工具的需求持續增加。
-            這為 ETF Advisor Fusion 提供明確的成長空間。
-          </p>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <div class="icon">🌍</div>
-            <h3>Large Addressable Market</h3>
-            <p>
-              ETF 已成為全球投資人進行低成本、多元配置與被動投資的重要工具。
-              市場規模越大，投資人對資料整理、產品比較與投資組合管理的需求也越明顯。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">📈</div>
-            <h3>Self-Directed Investing</h3>
-            <p>
-              越來越多投資人希望自行管理資產，而不是完全依賴傳統理財顧問。
-              因此，能提供清楚資訊、分析工具與投資教育的平台具備高度價值。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🤖</div>
-            <h3>AI-Enhanced Advisory</h3>
-            <p>
-              AI 技術能協助平台將大量 ETF 資料轉化為個人化洞察，
-              使投資建議更符合不同使用者的財務目標與風險偏好。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="competition" class="section-light">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Competition</div>
-          <h2>相較 Morningstar、Robo-Advisors 與券商工具，ETF Advisor Fusion 聚焦個人化與 ETF 專業場景</h2>
-          <p>
-            競爭者包含大型投資研究平台、機器人理財服務與券商內建工具。
-            ETF Advisor Fusion 的差異化在於 ETF-focused 與 personalization。
-          </p>
-        </div>
-
-        <table class="comparison-table">
-          <thead>
+<section>
+    <h2>功能對比：降維打擊傳統工具 [cite: 43]</h2>
+    <table>
+        <thead>
             <tr>
-              <th>競爭類型</th>
-              <th>代表平台</th>
-              <th>常見優勢</th>
-              <th>ETF Advisor Fusion 的差異化</th>
+                <th>核心功能 [cite: 44]</th>
+                <th>Portfolio Visualizer / 一般金融網站 [cite: 44]</th>
+                <th>ETF 社群交易平台 [cite: 44]</th>
             </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
             <tr>
-              <td><span class="tag">Investment Research</span></td>
-              <td>Morningstar 類型研究平台</td>
-              <td>資料豐富、研究內容完整、品牌信任度高。</td>
-              <td>更聚焦 ETF 投資流程，並加入個人化建議與教育體驗。</td>
+                <td>動態再平衡</td>
+                <td>X (僅固定比例)</td>
+                <td class="highlight">✔ (AI 主動提示)</td>
             </tr>
-
             <tr>
-              <td><span class="tag">Robo-Advisors</span></td>
-              <td>機器人理財平台</td>
-              <td>可提供自動化資產配置與投資組合管理。</td>
-              <td>更強調使用者自主決策、ETF 資訊透明度與金融素養提升。</td>
+                <td>AI Agent 自動報告</td>
+                <td>X</td>
+                <td class="highlight">✔ (主動生成)</td>
             </tr>
-
             <tr>
-              <td><span class="tag">Brokerage Tools</span></td>
-              <td>券商內建投資工具</td>
-              <td>交易流程整合、使用者可直接下單。</td>
-              <td>不只支援交易前資訊查詢，也提供 ETF 比較、組合分析與個人化洞察。</td>
+                <td>分析報告評分機制</td>
+                <td>X</td>
+                <td class="highlight">✔ (自動品管)</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+            <tr>
+                <td>全球在地化擴張</td>
+                <td>X (單一市場 / 偏美股)</td>
+                <td class="highlight">✔ (TradingView 模式)</td>
+            </tr>
+            <tr>
+                <td>流量大數據分析</td>
+                <td>X</td>
+                <td class="highlight">✔ (深度週/月報)</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
-    <section id="growth">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Growth Strategy</div>
-          <h2>以內容驅動獲客、社群經營與 B2B 擴張推動成長</h2>
-          <p>
-            ETF Advisor Fusion 的成長策略包含 Content-driven acquisition、Community building 與 B2B expansion。
-          </p>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-stage">Stage 01</div>
-            <div>
-              <h3>Content-Driven Acquisition</h3>
-              <p>
-                透過 ETF 教育文章、投資觀念內容、產品比較指南與市場解讀吸引自然流量，
-                將金融教育內容轉化為使用者信任與平台導流來源。
-              </p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-stage">Stage 02</div>
-            <div>
-              <h3>Community Building</h3>
-              <p>
-                建立 ETF 投資學習社群，讓使用者能分享投資觀念、提問、討論 ETF 配置策略，
-                並提高平台使用黏著度與品牌信任。
-              </p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-stage">Stage 03</div>
-            <div>
-              <h3>B2B Expansion</h3>
-              <p>
-                透過 API、資料授權與機構合作，將平台能力延伸到券商、金融科技公司、投資服務平台與教育機構，
-                擴大營收來源並降低只依賴 C 端訂閱的風險。
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="traction" class="section-light">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Current Traction</div>
-          <h2>Beta 產品已推出，已有早期用戶、正向回饋與初步合作</h2>
-          <p>
-            目前平台已進入 Beta 階段，並開始累積使用者回饋與合作機會，代表產品概念已經從想法進入初步市場驗證階段。
-          </p>
-        </div>
-
-        <div class="grid grid-4">
-          <div class="card">
-            <div class="icon">🚀</div>
-            <h3>Beta Product</h3>
-            <p>Beta 產品已推出，表示核心產品體驗與功能架構已具備初步可展示版本。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">👥</div>
-            <h3>Early Users</h3>
-            <p>已有早期用戶 onboarded，可作為後續功能優化與市場定位調整的重要基礎。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">💬</div>
-            <h3>Positive Feedback</h3>
-            <p>早期回饋正向，顯示市場對整合 ETF 資訊、分析與個人化建議有潛在需求。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🤝</div>
-            <h3>Initial Partnerships</h3>
-            <p>已有初步合作關係，未來可進一步支援 B2B 擴張與機構合作策略。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="financials">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Financials</div>
-          <h2>透過訂閱與 B2B 營收擴張，目標在 3–5 年內達成獲利</h2>
-          <p>
-            平台財務規劃以訂閱制收入與 B2B 收入為主要成長動能，並以產品規模化與市場擴張帶動長期獲利能力。
-          </p>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <div class="icon">💳</div>
-            <h3>Subscription Revenue</h3>
-            <p>
-              透過 Freemium 模式將免費使用者轉換為付費訂閱者，
-              進階功能可包含更深度的投資組合分析、AI 建議與個人化洞察。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🔌</div>
-            <h3>B2B Revenue</h3>
-            <p>
-              透過 API、資料授權與機構合作創造企業端收入，
-              擴大平台在金融服務生態系中的應用場景。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🎯</div>
-            <h3>Profitability Target</h3>
-            <p>
-              財務目標是在 3–5 年內達成獲利，重點在於提高用戶數、付費轉換率、B2B 合作規模與營運效率。
-            </p>
-          </div>
-        </div>
-
-        <div class="disclaimer">
-          注意：本網站內容僅用於專案展示與金融教育說明，不構成任何投資建議、買賣建議或保證報酬。
-          ETF 投資仍涉及市場風險，使用者應根據自身財務狀況與風險承受度做出判斷。
-        </div>
-      </div>
-    </section>
-
-    <section id="team" class="section-light">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Team</div>
-          <h2>結合 Finance、FinTech、AI 與 Product Development 的跨領域團隊</h2>
-          <p>
-            ETF Advisor Fusion 的團隊能力涵蓋金融專業、金融科技、人工智慧與產品開發，
-            能夠支援從資料分析、推薦系統設計到使用者產品體驗的完整建置流程。
-          </p>
-        </div>
-
-        <div class="grid grid-4">
-          <div class="card">
-            <div class="icon">🏦</div>
-            <h3>Finance</h3>
-            <p>理解 ETF、投資組合、風險管理與金融市場需求。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">💡</div>
-            <h3>FinTech</h3>
-            <p>將金融服務與數位平台結合，創造可擴展的投資工具。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🧬</div>
-            <h3>AI</h3>
-            <p>運用人工智慧支援 ETF 推薦、個人化洞察與資料分析。</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🛠️</div>
-            <h3>Product Development</h3>
-            <p>負責產品設計、功能開發、使用者體驗與平台迭代。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="funding">
-      <div class="container">
-        <div class="section-title">
-          <div class="eyebrow">Funding Status</div>
-          <h2>目前處於 Pre-seed / Seed 階段，尋求資金以支持產品擴張與市場拓展</h2>
-          <p>
-            ETF Advisor Fusion 目前正尋求早期階段資金，主要用途包含產品功能擴充、資料與分析能力強化、
-            使用者成長、B2B 合作與市場拓展。
-          </p>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <div class="icon">🌱</div>
-            <h3>Current Stage</h3>
-            <p>
-              專案目前定位於 Pre-seed / Seed 階段，已具備 Beta 產品、早期使用者與初步合作基礎，
-              下一步是將產品推向更大規模的市場驗證。
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">📌</div>
-            <h3>Use of Funds</h3>
-            <ul class="list">
-              <li>擴充 ETF Dashboard 與 Portfolio Analytics 的資料與分析能力。</li>
-              <li>強化 AI Recommendations 與 Personalized Insights 的個人化程度。</li>
-              <li>投資內容行銷與社群經營，加速使用者成長。</li>
-              <li>建立 B2B API、資料授權與機構合作所需的商業化能力。</li>
-              <li>擴大產品、工程、金融研究與商務開發團隊。</li>
+<section>
+    <h2>商業模式與成長飛輪 [cite: 53, 65]</h2>
+    <div class="price-table">
+        <div class="price-box">
+            <h3>免費版 (Freemium) [cite: 54]</h3>
+            <ul>
+                <li>基礎 ETF 評等查詢 [cite: 55]</li>
+                <li>固定比例基礎回測工具 [cite: 58]</li>
             </ul>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <div class="container">
-        <h2>Building Smarter ETF Investing Through Intelligence, Analytics, and Education</h2>
-        <p>
-          ETF Advisor Fusion 致力於將 ETF 投資從資訊碎片化的查詢流程，
-          升級為結合資料、分析、AI 推薦與金融教育的一站式智慧投資體驗。
-        </p>
-        <a href="mailto:contact@example.com" class="btn btn-primary">Contact Us</a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container footer-content">
-      <p>© 2026 ETF Advisor Fusion. All rights reserved.</p>
-      <p>Intelligent Financial Literacy for Smarter ETF Investing.</p>
+        <div class="price-box">
+            <h3>專業版 (Premium) [cite: 56]</h3>
+            <ul>
+                <li>AI Agent 深度分析報告 (含評分) [cite: 59]</li>
+                <li>動態再平衡決策引擎 [cite: 60]</li>
+                <li>每日申購流量快報 [cite: 57]</li>
+                <li>全球市場 AI 診斷與遊戲化競賽 [cite: 61, 62]</li>
+            </ul>
+        </div>
     </div>
-  </footer>
+</section>
+
+<section>
+    <h2>發展里程碑 [cite: 76]</h2>
+    <ul>
+        <li><strong>已完成：</strong> 核心評等引擎、AI 報告生成系統上線、動態再平衡模組驗證 [cite: 78, 79, 80]。</li>
+        <li><strong>現狀：</strong> 通過 MVP 內測 [cite: 74, 75]。</li>
+        <li><strong>下一階段：</strong> 部署首個海外在地化節點 (美國/日本) [cite: 81]。</li>
+    </ul>
+</section>
+
+<div class="footer">
+    <p>引領下一個 ETF 投資十年：將複雜變簡單，將數據變為決策 [cite: 82]</p>
+    <p>官方網站：www.etf-community.com | 聯繫我們：founder@etf-community.com [cite: 82]</p>
+</div>
 
 </body>
 </html>
-
